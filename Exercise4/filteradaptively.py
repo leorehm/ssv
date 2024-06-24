@@ -1,7 +1,13 @@
 import numpy as np
 from scipy.signal import lfilter
 
-def filter_adaptively(ma_coeff: np.ndarray, ar_coeff: np.ndarray, signal:np.ndarray, filter_state_in: np.ndarray =None) -> [np.ndarray, np.ndarray]:
+
+def filter_adaptively(
+    ma_coeff: np.ndarray,
+    ar_coeff: np.ndarray,
+    signal: np.ndarray,
+    filter_state_in: np.ndarray = None,
+):  # -> [np.ndarray, np.ndarray]:
     """
     Allows for segment-wise filtering of a signal with changing filters.
 
