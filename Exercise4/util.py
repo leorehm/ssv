@@ -24,7 +24,7 @@ def my_windowing(
     samples_per_shift = int(sampling_rate * frame_shift / 1000)
 
     N = len(v_signal)
-    num_frames = int(np.ceil((N - samples_per_frame) / samples_per_shift)) + 1
+    num_frames = int(np.ceil(len(v_signal) / (sampling_rate * frame_shift / 1000)))
 
     m_frames = np.zeros((num_frames, samples_per_frame))
     v_time_frame = np.zeros(num_frames)
