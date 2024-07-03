@@ -6,15 +6,57 @@
 
 *What are the most important classes of speech sounds?*
 
+voiced sounds
+- vowels (a,e,i,o,u)
+- sounds with mixed excitation (/v/)
+
+unvoiced sounds
+- fricative (/s/,/th/,/sh/)
+- plosive (/k/,/p/,/t/)
+
+
 *What is the difference between a phone and a phoneme? What is an allophone?*
+
+- **Phone**: Smallest speech segment with distinct physical or perceptual properties.
+  - **Example**: The sound [p] in the words "pat" and "spat" are two instances of the same phone.
+
+- **Phoneme**: The smallest contrastive linguistic unit which may bring about a change of meaning. One phoneme consists of a set of phones that are thought of as the same element within the phonology of a particular language (→ allophones).
+  - **Example**: The phoneme /p/ in English can change the meaning of a word, as in "pat" vs. "bat".
+
+- **Allophone**: One phone of the many that constitute a phoneme.
+  - **Example**: The [p] sound in "pat" (aspirated) and the [p] sound in "spat" (unaspirated) are allophones of the phoneme /p/ in English.
 
 *How can phones be categorized into an international phonetic alphabet?*
 
+Phonemes are characterized by the way of articulation
+- Vowel
+- Nasal
+- Fricative
+- Plosive
+
+
 *What comprises prosody?*
+
+Rhythm, stress, and intonation of speech
+- Reflects
+  - Emotional state of the speaker
+  - Form of the utterance (statement, question, or command)
+  - Irony or sarcasm
+  - Emphasis, contrast, and focus
+
+Remark: Often, only the intonation is meant when we say 'prosody'. However, intonation is strictly speaking only part of the prosody.
+
 
 *How does human speech production work?*
 
+- Lungs produce air flow
+- In the larynx (Kehlkopf) the vocal cords start vibrating and produce sound
+- In the vocal tract, the sound is formed to produce a speech sound.
+
+
 *How can human speech production be modeled in a simplified framework?*
+
+//Todo
 
 *What is the difference between formant frequency and fundamental frequency*
 
