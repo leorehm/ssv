@@ -105,7 +105,7 @@ def compute_istft(
     """
 
     # compute inverse rFFT and apply synthesis window
-    time_frames = np.fft.irfft(stft.T)
+    time_frames = np.fft.irfft(stft)
     num_frames, samples_per_frame = time_frames.shape
     assert samples_per_frame == len(
         synthesis_window
