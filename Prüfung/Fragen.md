@@ -56,25 +56,81 @@ Remark: Often, only the intonation is meant when we say 'prosody'. However, into
 
 *How can human speech production be modeled in a simplified framework?*
 
-//Todo
+**Source-Filter Model**
 
-*What is the difference between formant frequency and fundamental frequency*
+Source: air flow, vibration of vocal cords
+Filter: Shape of the vocal tract: Position of tongue, lips, palate
 
+![alt text](image.png)
+
+Required Parameters:
+- voiced/unvoiced classification
+- fundamental period T0
+-  vocal tract filter
+
+The vocal tract is modeled by the filter h(n).
+
+![alt text](image-1.png)
+
+*What is the difference between formant frequency and fundamental frequency?*
 *Note: Essential for passing this course*
+
+- In the source-filter model, excitation (source) and filter (vocal tract)
+are treated as being independent.
+- Formants: Peaks of the spectral envelope, resonances of the vocal tract -> defines the meaning of a phone
+- Fundamental frequency: first peak of the spectral fine structure,
+and distance between spectral harmonics.
 
 *What is a formant map?*
 
+A formant map is a visual representation of the formant frequencies of speech sounds, typically vowels, plotted in a two-dimensional space. Formants are resonant frequencies of the vocal tract and are crucial in distinguishing different vowel sounds.
+![alt text](image-2.png)
+
 *What are the three essential parts of the human ear?*
+
+Outer, Middel and inner ear
 
 *Why is a spectral representation of audio signal so easy to interpret for humans?*
 
+- **Frequency Analysis**: Humans naturally perceive sounds in terms of frequency. The human ear and brain are adept at distinguishing different frequencies, making spectral representation intuitive.
+  
+- **Visual Clarity**: Spectral representation separates complex audio signals into their constituent frequencies, making it easier to identify patterns, harmonics, and noise components visually.
+
+- **Speech and Music**: Spectral representation highlights the fundamental frequencies and harmonics of speech and music, which are critical for understanding and appreciating these sounds.
+
+- **Noise Identification**: Spectral representation helps in identifying and isolating noise components from desired signals, which is essential in audio processing and enhancement.
+
+- **Temporal Changes**: Spectrograms, which are time-frequency representations, allow for the visualization of how the spectral content of a signal changes over time, providing a comprehensive view of dynamic audio signals.
+
+- **Natural Resonances**: The human vocal tract and musical instruments produce sounds with characteristic resonances and formants that are easily visible in a spectral representation, aiding in analysis and synthesis.
+
+- **Technical Applications**: Engineers and scientists use spectral representations to design filters, analyze system behavior, and develop audio compression algorithms, leveraging the clear and detailed information provided by the spectrum.
+
+
 ## Fundamental Frequency Estimation
+**Periodicity in speech signals**
 
-*What is a typical range for the fundamental frequency of humans*
+  | Unvoiced Speech           | Voiced Speech                |
+  |---------------------------|------------------------------|
+  | ■ noise excitation        | ■ periodic glottis excitation|
+  | ■ pitch not available     | ■ pitch available            |
 
+![alt text](image-3.png)
+
+*What is a typical range for the fundamental frequency of humans?*
+
+**Fundamental frequency:** 40 Hz – 600 Hz (600 Hz for
+children)
+ 
 *What are average fundamental frequencies for female and male speakers, respectively?*
 
+<u> male speakers:</u> around 100Hz; 
+<u>female speakers:</u> around 200Hz
+
 *How is it possible to distinguish female from male speakers in narrowband telephony?*
+
+■ Narrowband telephone speech is bandpass filtered between 300 Hz and
+3400 Hz (“telephone voice”)
 
 *How can the fundamental frequency of phones be measured?*
 
