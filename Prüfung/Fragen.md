@@ -134,53 +134,288 @@ children)
 
 *How can the fundamental frequency of phones be measured?*
 
+Simple solution: Distance between peaks (or zero-crossing before the
+peaks) in the time-domain
+
+Better: autocorrelation-base
+Let $ x(n) $ denote a realization of a random process
+
+- **Autocorrelation function**
+  $$ \phi_{XX}(\lambda) = E(x(n)x^*(n + \lambda)) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} u v p_{x(n),x^*(n+\lambda)}(u, v) \, du \, dv $$
+
+- The signal is shifted against itself → measure of self-similarity
+
+- Estimation for a quasi-stationary segment of length $ N $ for lag $ \lambda > 0 $
+  $$ \hat{\phi}_{xx}(\lambda) = \frac{1}{N - |\lambda|} \sum_{n=0}^{N - |\lambda| - 1} x(n)x^*(n + \lambda) $$
+
+- The Fourier transform of the autocorrelation function is called power spectral density (PSD)
+  $$ \Phi_X(f) = \sum_{\lambda = -\infty}^{\infty} \phi_{XX}(\lambda) e^{-j\Omega\lambda} $$
+
+
+The peak next to the lag λ = 0 of the autocorrelation function
+corresponds to the fundamental period T0.
+First peak in the fine structure of the spectrum corresponds to the
+speech fundamental frequency f0 = 1/T0.
+
 *How would you choose the segment/window length when estimating the varying fundamental frequency of speech? What is the trade-off?*
+
+The window length must be carefully chosen
+- The more periods fit into a window, the more robust the
+estimation (the larger the window, the better)
+- The speech fundamental frequency changes over time (the shorter
+the window, the better)
+- ≈ 30 ms is a good compromise (3 periods at f0 = 100 Hz)
 
 ## Spectral Analysis of Audio Signals
 
+For speech signals, useful spectral representations are
+- Short-time (discrete) Fourier transform (DFT, STFT)
+- Short-time (discrete) Cosine transform (DCT)
+- Eigenvalue/eigenvector decomposition (Karhunen-Loève transform,
+KLT)
+- (Generalized) singular value decomposition (SVD, GSVD)
+- Filter bank coefficients
+- Wavelet transform coefficients
+- Parametric model coefficients: autoregressive parameters (LPC),
+reflection coefficients, log-area ratios, cepstral coefficients, Line
+Spectral Frequencies (LSF), mel-frequency cepstral coefficients (MFCC)
+
+
 *What are complex numbers and how can they be represented?*
+
+We see that the Fourier series consists of the comparison with (1) sine and (2) cosine functions. 
+
+It can be expressed much more elegantly by means of complex numbers:
+
+- For many spectral transformations, complex numbers are needed.
+- A complex number \( z \) is composed of a real part \( a \) and an imaginary part \( b \)
+  \[
+  z = \text{Re} \{z\} + j \text{Im} \{z\} = a + jb
+  \]
+- \( j \) is the imaginary unit and separates the real and imaginary parts.
+
 
 *How are real and imaginary part related to magnitude and phase?*
 
+A complex number \( z = a + jb \) can be represented in polar form as \( z = |z| e^{j\theta} \), where:
+
+- \( |z| \) is the magnitude (or modulus) of the complex number.
+- \( \theta \) is the phase (or argument) of the complex number.
+
+The magnitude \( |z| \) is given by:
+$$ |z| = \sqrt{a^2 + b^2} $$
+
+The phase \( \theta \) is given by:
+$$ \theta = \tan^{-1} \left( \frac{b}{a} \right) $$
+
+The real part \( a \) and the imaginary part \( b \) can be related to the magnitude and phase as follows:
+$$ a = |z| \cos(\theta) $$
+$$ b = |z| \sin(\theta) $$
+
 *What is Euler's relation?*
+
+Euler's relation (memorize!)
+
+$$ e^{j\phi} = \cos \phi + j\sin(\phi) $$
+
 
 *For what kind of signals would you use a Fourier series analysis, and for which a Fourier transform to analyze its spectral content?*
 
-*Fourier transform pairs: What is the Fourier transform of an Impulse?*
 
-*a rectangular function?*
 
-*a sinusoid?*
+- **Fourier Series Analysis**:
+  - Used for periodic signals.
+  - Breaks down a periodic signal into a sum of sine and cosine functions with discrete frequencies.
+  - Examples:
+    - Analyzing the harmonics in a musical note.
+    - Studying the repetitive patterns in a square wave signal.
 
-*a delta comb?*
+- **Fourier Transform**:
+  - Used for non-periodic or aperiodic signals.
+  - Transforms a signal from the time domain to the frequency domain, providing a continuous spectrum of frequencies.
+  - Examples:
+    - Analyzing the frequency content of a speech signal.
+    - Studying transient signals like an impulse or a shock wave.
 
-*a periodic signal like a sawtooth signal (qualitatively)?*
+
+*Fourier transform pairs: What is the Fourier transform of*
+
+**an Impulse?**
+- Time Domain: The impulse or delta function 𝛿(𝑡) is represented as a spike at 𝑡=0
+- Frequency Domain: Its Fourier transform is a constant function across all frequencies, indicating that an impulse contains all frequencies equally.
+
+![alt text](image-5.png)
+
+**a rectangular function?**
+- Time Domain: The rectangular function rect(t) is represented as a box or rectangle with width 
+𝑑.
+- Frequency Domain: Its Fourier transform is a sinc function, indicating that a rectangular time-domain signal has a sinc-shaped frequency spectrum.
+ 
+![alt text](image-6.png)
+
+**a sinusoid?**
+  -Time Domain: The sinusoidcos(ω0t) is represented as a continuous wave oscillating with period 
+𝑇.
+- Frequency Domain: Its Fourier transform consists of two delta functions at ±ω 0, indicating that a sinusoid corresponds to a single frequency component.
+
+![alt text](image-7.png)
+
+**a delta comb?**
+- Time Domain: The delta comb is a series of delta functions spaced by T in the time domain.
+- Frequency Domain: Its Fourier transform is another delta comb with spacing 
+1/𝑇 in the frequency domain, indicating periodicity in time results in discrete frequency components.
+
+![alt text](image-8.png)
+
+**a periodic signal like a sawtooth signal (qualitatively)?**
+
+steht nichts in der Vorlesung
 
 *What is a linear time-invariant (LTI) system? Give examples.*
 
+A **linear time-invariant (LTI) system** is a system in signal processing and control theory that satisfies two key properties:
+
+1. **Linearity**:
+   - The principle of superposition applies. This means that the response caused by two or more stimuli is the sum of the responses that would have been caused by each stimulus individually.
+   - Mathematically, if the system's response to \( x_1(t) \) is \( y_1(t) \) and the response to \( x_2(t) \) is \( y_2(t) \), then the response to \( a_1 x_1(t) + a_2 x_2(t) \) is \( a_1 y_1(t) + a_2 y_2(t) \), where \( a_1 \) and \( a_2 \) are constants.
+
+2. **Time-Invariance**:
+   - The system's properties do not change over time. If the input signal is shifted in time, the output is shifted by the same amount.
+   - Mathematically, if the system's response to \( x(t) \) is \( y(t) \), then the response to \( x(t - t_0) \) is \( y(t - t_0) \).
+
+### Examples:
+
+1. **Electrical Circuits**:
+   - An RC (resistor-capacitor) circuit is a classic example of an LTI system. The voltage across the capacitor in response to an input voltage can be described by linear differential equations, and its behavior does not change over time.
+
+2. **Mechanical Systems**:
+   - A mass-spring-damper system is an LTI system where the force applied to the mass results in a displacement. The relationship between force and displacement (or velocity) is linear, and the system properties (mass, damping coefficient, spring constant) are time-invariant.
+
+3. **Digital Filters**:
+   - A digital FIR (Finite Impulse Response) filter is an example of an LTI system in the discrete domain. The filter's output is a linear combination of current and past input values, and the filter coefficients do not change over time.
+
+4. **Acoustic Systems**:
+   - A room's acoustic response to a sound source can be modeled as an LTI system. The way sound reflects off the walls and reaches a listener is linear, and assuming the room's properties do not change, it is time-invariant.
+
+### Mathematical Representation:
+
+An LTI system can be described using convolution:
+$$
+y(t) = x(t) * h(t) = \int_{-\infty}^{\infty} x(\tau) h(t - \tau) \, d\tau
+$$
+where \( x(t) \) is the input, \( y(t) \) is the output, and \( h(t) \) is the system's impulse response.
+
+In the frequency domain, an LTI system is characterized by its transfer function \( H(\omega) \), which is the Fourier transform of the impulse response \( h(t) \):
+$$
+Y(\omega) = H(\omega) X(\omega)
+$$
+where \( X(\omega) \) and \( Y(\omega) \) are the Fourier transforms of the input and output signals, respectively.
+
 *How can the relation between the input and the output of an LTI system be mathematically described in time and frequency domain, respectively?*
+
+![alt text](image-9.png)
 
 *How does a discretization of the time domain signal affect its spectrum?*
 
+When a continuous-time signal is discretized, it is sampled at regular intervals. This means that instead of having a value for every possible point in time, we only have values at specific, evenly spaced points.
+
+- **Aliasing**: When a continuous time-domain signal is sampled discretely, frequencies higher than half the sampling rate (Nyquist frequency) are folded back into the lower frequencies, causing distortion known as aliasing.
+- **Spectral Replication**: The spectrum of the discrete signal becomes periodic with period equal to the sampling rate. This means the original spectrum is replicated at intervals of the sampling frequency.
+- **Loss of High-Frequency Information**: If the sampling rate is not high enough, high-frequency components of the original signal can be lost or misrepresented.
+
+### Mathematical Representation:
+Given a continuous signal \( x(t) \) sampled at intervals \( T \), the discrete signal \( x[n] = x(nT) \). The Discrete-Time Fourier Transform (DTFT) of \( x[n] \) is:
+$$
+X(e^{j\omega}) = \sum_{n=-\infty}^{\infty} x[n] e^{-j\omega n}
+$$
+This spectrum is periodic with period \( 2\pi \).
+
 *How does a discretization of the spectrum of a signal affect its time-domain representation?*
+
+When a continuous frequency spectrum is discretized, it is sampled at specific frequency intervals. This can happen, for example, when performing a Discrete Fourier Transform (DFT).
+
+- **Periodicity in Time Domain**: Discretizing the spectrum of a signal (as in sampling in the frequency domain) causes the time-domain signal to become periodic. The period of this repetition is the inverse of the spacing between the discrete frequency samples.
+- **Truncation Effects**: If the spectrum is truncated (i.e., not all frequency components are included), this causes the time-domain signal to be smoothed, which can lead to loss of detail or distortion.
+
+### Mathematical Representation:
+Given a continuous spectrum \( X(f) \) sampled at intervals \( \Delta f \), the inverse Fourier transform provides a time-domain signal that repeats with period \( \frac{1}{\Delta f} \):
+$$
+x(t) = \sum_{k=-\infty}^{\infty} X(k\Delta f) e^{j 2\pi k \Delta f t}
+$$
 
 *Explain the sampling theorem*
 
+The **sampling theorem**, also known as the **Nyquist-Shannon sampling theorem**, is a fundamental principle in the field of digital signal processing. It defines the conditions under which a continuous signal can be sampled and perfectly reconstructed from its samples. The theorem states:
+
+- **Statement**: A continuous-time signal that has been band-limited to a maximum frequency \( f_{\text{max}} \) can be completely represented and perfectly reconstructed from its samples if the sampling rate \( f_s \) is greater than twice the maximum frequency \( f_{\text{max}} \).
+
+
 *What are typical sampling rates for speech and audio signals, respectively? Why?*
+
+*What are typical sampling rates for speech and audio signals, respectively? Why?*
+- **Speech Signals**: Typically sampled at 8 kHz or 16 kHz to balance quality and bandwidth.
+- **Audio Signals**: Typically sampled at 44.1 kHz for high-quality audio, with higher rates used in professional applications to ensure maximum fidelity and flexibility in post-production.
+
+These sampling rates are chosen based on the Nyquist-Shannon sampling theorem to ensure accurate capture and reproduction of the respective frequency ranges of speech and audio signals.
+
 
 *What is cyclic convolution, and how can it be avoided?*
 
+(N = 8)
+- However, multiplying two DFT coefficient sets of length N results in a
+cyclic convolution with period N in the time domain.
+
+- Here N is chosen such that it equals the sum of nonzero entries minus
+one, i.e. N = 7 + 4 − 1 = 10.
+- Cyclic convolution artifacts can be avoided by zero-padding!
+
 *What are the pros and cons for tapered spectral analysis windows, like a Hann windows, when compared to a rectangular window?*
+
+- The choice of the windowing function is a trade-off between spectral
+resolution and spectral leakage
+- Rectangular (boxcar) window
+- Fourier transform is a Sinc-function
+- Narrow main-lobe good frequency resolution
+- Large side-lobes spectral leakage (bad)
+- Tapered windows (Hann, Hamming, ...)
+- Main-lobe wider than for Rectangular window slightly decreased
+frequency resolution
+- lower side-lobes less spectral leakage (good)
+- Usually the preferred choice!
+
 
 *What is the difference between a wideband and a narrowband spectrogram wrt the visible properties of speech signals?*
 
+![alt text](image-10.png)
+
 *How is a time delay by one sample represented in the z-domain?*
+
+![alt text](image-11.png)
 
 ## Vocal Tract Model and Linear Prediction
 
 *Sketch and explain the source-filter model*
 
+simple model of the vocal tract: ![ 
+](image-12.png)
+
+
 *How many Formants do we expect in speech signals per kHz? How many in a speech signal sampled at 16kHz?*
+
+- Speech sounds:
+  - voiced: periodic opening and closing of the vocal cords →
+fundamental period T0,
+  - unvoiced: open vocal cords, constriction somewhere in the vocal
+tract,
+- Resonances of the vocal tract result in peaks in the spectral envelope of
+speech sounds (Formants).
+- Different resonance frequencies result in different meanings of an
+utterance
+
+**Rule of thumb:**
+”One resonance/ format per kHz“.
+
+That means with a signal sampled at 16kHz, where the Nyquist Frequency is 8kHz. So 8 
 
 *How is the Kelly-Lochbaum structure related to the tube model of the vocal tract?*
 
